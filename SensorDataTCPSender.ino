@@ -64,6 +64,7 @@ void setupWiFi() {
   Serial.println("\nStarting connection to server...");
   // if you get a connection, report back via serial:
   server.begin();
+  
   printWiFiStatus();
 }
 
@@ -161,6 +162,9 @@ void sendSensorData() {
                               };
       packer.pack(dataArray, sizeof(dataArray));
       server.write(packer.data(), packer.size());
+    }
+    if (!client.available()) {
+      //client.stop();
     }
   }
 }
